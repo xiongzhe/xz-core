@@ -1,13 +1,14 @@
 # xz-core
 android快速开发
 
-项目gradle中配置：
-	allprojects {
-		repositories {
-			...
-			maven { url 'https://jitpack.io' }
-		}
-	}
+项目gradle中配置：  
+
+allprojects {  
+	repositories {  
+		...  
+		maven { url 'https://jitpack.io' }  
+	}  
+}  
 
 app gradle中配置
 
