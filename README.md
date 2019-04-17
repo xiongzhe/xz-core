@@ -12,4 +12,4 @@ allprojects {
 
 app gradle中配置
 
-implementation 'com.github.xiongzhe:xz-core:Tag'
+implementation 'com.github.xiongzhe:xz-core:v1.0.0'
