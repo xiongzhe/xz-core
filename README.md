@@ -4,10 +4,10 @@ android快速开发
 项目gradle中配置：  
 
 allprojects {  
-	repositories {  
-		...  
-		maven { url 'https://jitpack.io' }  
-	}  
+&nbsp;&nbsp;&nbsp;repositories {  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;maven { url 'https://jitpack.io' }  
+&nbsp;&nbsp;&nbsp;}  
 }  
 
 app gradle中配置
