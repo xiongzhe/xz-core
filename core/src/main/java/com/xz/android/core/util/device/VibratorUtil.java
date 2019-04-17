@@ -15,7 +15,6 @@ public class VibratorUtil {
      * 手机振动器
      */
     public static void vibrate(Context context) {
-
         Vibrator vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
         vibrator.vibrate(200);
     }
