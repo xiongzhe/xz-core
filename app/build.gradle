@@ -21,4 +21,7 @@ android {
 dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     implementation project(':core')
+
+    // 引用范例
+//    api 'com.github.xiongzhe:xz-core:v1.0.1'
 }
