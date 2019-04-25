@@ -66,6 +66,9 @@ public class RxNetClient {
             case HttpMethod.POST_HEAERS_RAW:
                 observable = service.postRawWithHeader(HEADERS, URL, BODY);
                 break;
+            case HttpMethod.POST_RAW:
+                observable = service.postRaw(URL, BODY);
+                break;
             case HttpMethod.PUT:
                 observable = service.put(URL, PARAMS);
                 break;

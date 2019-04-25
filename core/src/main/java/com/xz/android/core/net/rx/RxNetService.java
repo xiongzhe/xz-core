@@ -42,6 +42,9 @@ public interface RxNetService {
     @POST
     Observable<String> postRawWithHeader(@HeaderMap HashMap<String, Object> headers, @Url String url, @Body RequestBody body);
 
+    @POST
+    Observable<String> postRaw(@Url String url, @Body RequestBody body);
+
     @FormUrlEncoded
     @PUT
     Observable<String> put(@Url String url, @FieldMap HashMap<String, Object> params);
