@@ -12,6 +12,15 @@ import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Retrofit;
 
+import static com.xz.android.core.net.HttpMethod.DELETE;
+import static com.xz.android.core.net.HttpMethod.GET;
+import static com.xz.android.core.net.HttpMethod.POST;
+import static com.xz.android.core.net.HttpMethod.POST_PARAMS;
+import static com.xz.android.core.net.HttpMethod.POST_RAW;
+import static com.xz.android.core.net.HttpMethod.PUT;
+import static com.xz.android.core.net.HttpMethod.PUT_RAW;
+import static com.xz.android.core.net.HttpMethod.UPLOAD;
+
 /**
  * 网络请求客户端
  * Created by xiong on 2017/12/12
@@ -51,46 +60,33 @@ public class RxNetClient {
         RxNetService service = retrofit.create(RxNetService.class);
         Observable<String> observable = null;
         switch (method) {
-            case HttpMethod.GET:
-                observable = service.get(URL, PARAMS);
+            case GET:
+                observable = service.get(HEADERS, URL, PARAMS);
                 break;
-            case HttpMethod.GET_HEAERS:
-                observable = service.getWithHeader(HEADERS, URL, PARAMS);
+            case POST:
+                observable = service.post(HEADERS, URL, PARAMS);
                 break;
-            case HttpMethod.POST:
-                observable = service.post(URL, PARAMS);
+            case POST_PARAMS:
+                observable = service.postParams(HEADERS, URL, PARAMS);
                 break;
-            case HttpMethod.POST_HEAERS:
-                observable = service.postWithHeader(HEADERS, URL, PARAMS);
+            case POST_RAW:
+                observable = service.postRaw(HEADERS, URL, BODY);
                 break;
-            case HttpMethod.POST_HEAERS_RAW:
-                observable = service.postRawWithHeader(HEADERS, URL, BODY);
-                break;
-            case HttpMethod.POST_RAW:
-                observable = service.postRaw(URL, BODY);
-                break;
-            case HttpMethod.PUT:
+            case PUT:
                 observable = service.put(URL, PARAMS);
                 break;
-            case HttpMethod.PUT_RAW:
+            case PUT_RAW:
                 observable = service.putRaw(URL, BODY);
                 break;
-            case HttpMethod.DELETE:
+            case DELETE:
                 observable = service.delete(URL, PARAMS);
                 break;
-            case HttpMethod.UPLOAD:
-                RequestBody requestBody1 =
+            case UPLOAD:
+                RequestBody requestBody =
                         RequestBody.create(MediaType.parse(MultipartBody.FORM.toString()), FILE);
-                MultipartBody.Part body1 =
-                        MultipartBody.Part.createFormData("upload", FILE.getName(), requestBody1);
-                observable = service.upload(URL, body1);
-                break;
-            case HttpMethod.UPLOAD_HEADER:
-                RequestBody requestBody2 =
-                        RequestBody.create(MediaType.parse(MultipartBody.FORM.toString()), FILE);
-                MultipartBody.Part body2 =
-                        MultipartBody.Part.createFormData("upload", FILE.getName(), requestBody2);
-                observable = service.uploadWithHeader(HEADERS, URL, body2);
+                MultipartBody.Part body =
+                        MultipartBody.Part.createFormData("upload", FILE.getName(), requestBody);
+                observable = service.upload(HEADERS, URL, body);
                 break;
             default:
                 break;
@@ -100,60 +96,52 @@ public class RxNetClient {
     }
 
     public Observable<String> get() {
-        return request(HttpMethod.GET);
-    }
-
-    public Observable<String> getWithHeaders() {
-        return request(HttpMethod.GET_HEAERS);
+        return request(GET);
     }
 
     public Observable<String> post() {
         if (BODY == null) {
-            return request(HttpMethod.POST);
+            return request(POST);
         } else {
             if (!PARAMS.isEmpty()) {
                 throw new RuntimeException("params must be null!");
             }
-            return request(HttpMethod.POST_RAW);
+            return request(POST_RAW);
         }
     }
 
-    public Observable<String> postWithHeaders() {
+    public Observable<String> postParams() {
         if (BODY == null) {
-            return request(HttpMethod.POST_HEAERS);
+            return request(POST_PARAMS);
         } else {
             if (!PARAMS.isEmpty()) {
                 throw new RuntimeException("params must be null!");
             }
-            return request(HttpMethod.POST_RAW);
+            return request(POST_RAW);
         }
     }
 
-    public Observable<String> postRawWithHeader() {
-        return request(HttpMethod.POST_HEAERS_RAW);
+    public Observable<String> postRaw() {
+        return request(POST_RAW);
     }
 
     public Observable<String> put() {
         if (BODY == null) {
-            return request(HttpMethod.PUT);
+            return request(PUT);
         } else {
             if (!PARAMS.isEmpty()) {
                 throw new RuntimeException("params must be null!");
             }
-            return request(HttpMethod.PUT_RAW);
+            return request(PUT_RAW);
         }
     }
 
     public Observable<String> delete() {
-        return request(HttpMethod.DELETE);
+        return request(DELETE);
     }
 
     public Observable<String> upload() {
-        return request(HttpMethod.UPLOAD);
-    }
-
-    public Observable<String> uploadWithHeaders() {
-        return request(HttpMethod.UPLOAD_HEADER);
+        return request(UPLOAD);
     }
 
     /**

@@ -27,23 +27,17 @@ import retrofit2.http.Url;
 public interface RxNetService {
 
     @GET
-    Observable<String> get(@Url String url, @QueryMap HashMap<String, Object> params);
-
-    @GET
-    Observable<String> getWithHeader(@HeaderMap HashMap<String, Object> headers, @Url String url, @QueryMap HashMap<String, Object> params);
+    Observable<String> get(@HeaderMap HashMap<String, Object> headers, @Url String url, @QueryMap HashMap<String, Object> params);
 
     @FormUrlEncoded
-    @POST
-    Observable<String> post(@Url String url, @FieldMap HashMap<String, Object> params);
+    @POST // post + x-www-form-urlencoded 参数 + header
+    Observable<String> post(@HeaderMap HashMap<String, Object> headers, @Url String url, @FieldMap HashMap<String, Object> params);
 
-    @POST
-    Observable<String> postWithHeader(@HeaderMap HashMap<String, Object> headers, @Url String url, @QueryMap HashMap<String, Object> params);
+    @POST // post + url参数 + header
+    Observable<String> postParams(@HeaderMap HashMap<String, Object> headers, @Url String url, @QueryMap HashMap<String, Object> params);
 
-    @POST
-    Observable<String> postRawWithHeader(@HeaderMap HashMap<String, Object> headers, @Url String url, @Body RequestBody body);
-
-    @POST
-    Observable<String> postRaw(@Url String url, @Body RequestBody body);
+    @POST // post + body参数 + header
+    Observable<String> postRaw(@HeaderMap HashMap<String, Object> headers, @Url String url, @Body RequestBody body);
 
     @FormUrlEncoded
     @PUT
@@ -61,9 +55,5 @@ public interface RxNetService {
 
     @Multipart
     @POST
-    Observable<String> upload(@Url String url, @Part MultipartBody.Part file);
-
-    @POST
-    @Multipart
-    Observable<String> uploadWithHeader(@HeaderMap HashMap<String, Object> headers, @Url String url, @Part MultipartBody.Part file);
+    Observable<String> upload(@HeaderMap HashMap<String, Object> headers, @Url String url, @Part MultipartBody.Part file);
 }
