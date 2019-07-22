@@ -10,7 +10,7 @@ import java.lang.annotation.RetentionPolicy;
  * Created by xiongz on 2017/12/13.
  */
 @StringDef({HttpMethod.GET, HttpMethod.POST, HttpMethod.POST_PARAMS,
-        HttpMethod.POST_RAW, HttpMethod.PUT, HttpMethod.PUT_RAW,
+        HttpMethod.POST_RAW, HttpMethod.POST_MULTIPART, HttpMethod.PUT, HttpMethod.PUT_RAW,
         HttpMethod.DELETE, HttpMethod.UPLOAD })
 @Retention(RetentionPolicy.SOURCE)
 public @interface HttpMethod {
@@ -18,6 +18,7 @@ public @interface HttpMethod {
     String POST = "POST";
     String POST_PARAMS = "POST_PARAMS";
     String POST_RAW = "POST_RAW";
+    String POST_MULTIPART = "POST_MULTIPART";
     String PUT = "PUT";
     String PUT_RAW = "PUT_RAW";
     String DELETE = "DELETE";

@@ -4,6 +4,7 @@ import com.xz.android.core.net.HttpMethod;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.Map;
 
 import io.reactivex.Observable;
 import okhttp3.MediaType;
@@ -15,6 +16,7 @@ import retrofit2.Retrofit;
 import static com.xz.android.core.net.HttpMethod.DELETE;
 import static com.xz.android.core.net.HttpMethod.GET;
 import static com.xz.android.core.net.HttpMethod.POST;
+import static com.xz.android.core.net.HttpMethod.POST_MULTIPART;
 import static com.xz.android.core.net.HttpMethod.POST_PARAMS;
 import static com.xz.android.core.net.HttpMethod.POST_RAW;
 import static com.xz.android.core.net.HttpMethod.PUT;
@@ -72,6 +74,10 @@ public class RxNetClient {
             case POST_RAW:
                 observable = service.postRaw(HEADERS, URL, BODY);
                 break;
+            case POST_MULTIPART:
+                Map<String, RequestBody> params = generateRequestBody(PARAMS);
+                observable = service.postMultipart(HEADERS, URL, params);
+                break;
             case PUT:
                 observable = service.put(URL, PARAMS);
                 break;
@@ -95,10 +101,12 @@ public class RxNetClient {
         return observable;
     }
 
+    // get请求
     public Observable<String> get() {
         return request(GET);
     }
 
+    // x-www-form-urlencoded 参数 post请求
     public Observable<String> post() {
         if (BODY == null) {
             return request(POST);
@@ -110,6 +118,7 @@ public class RxNetClient {
         }
     }
 
+    // url参数 post请求
     public Observable<String> postParams() {
         if (BODY == null) {
             return request(POST_PARAMS);
@@ -121,8 +130,15 @@ public class RxNetClient {
         }
     }
 
+    // body post请求
     public Observable<String> postRaw() {
         return request(POST_RAW);
+    }
+
+    // form-data post请求
+    public Observable<String> postMultipart() {
+
+        return request(POST_MULTIPART);
     }
 
     public Observable<String> put() {
@@ -136,22 +152,36 @@ public class RxNetClient {
         }
     }
 
+    // 删除
     public Observable<String> delete() {
         return request(DELETE);
     }
 
+    // 上传
     public Observable<String> upload() {
         return request(UPLOAD);
     }
 
-    /**
-     * 下载
-     *
-     * @return
-     */
+    // 下载
     public Observable<ResponseBody> download() {
         Retrofit retrofit = RetrofitManager.getInstance().createRetrofit();
         RxNetService service = retrofit.create(RxNetService.class);
         return service.download(URL, PARAMS);
+    }
+
+    /**
+     * Map<String, String> 转 Map<String, RequestBody>
+     *
+     * @param requestDataMap
+     * @return
+     */
+    private static Map<String, RequestBody> generateRequestBody(Map<String, Object> requestDataMap) {
+        Map<String, RequestBody> requestBodyMap = new HashMap<>();
+        for (String key : requestDataMap.keySet()) {
+            RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"),
+                    requestDataMap.get(key) == null ? "" : String.valueOf(requestDataMap.get(key)));
+            requestBodyMap.put(key, requestBody);
+        }
+        return requestBodyMap;
     }
 }
