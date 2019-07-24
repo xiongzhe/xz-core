@@ -52,4 +52,13 @@ public class RefreshHandler {
             mSwipeRefresh.setRefreshing(false);
         }
     }
+
+    /**
+     * 开始刷新
+     */
+    public void startRefresh() {
+        if (mSwipeRefresh != null && !mSwipeRefresh.isRefreshing()) {
+            mSwipeRefresh.setRefreshing(true);
+        }
+    }
 }

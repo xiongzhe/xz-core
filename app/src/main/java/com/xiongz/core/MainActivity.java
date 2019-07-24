@@ -6,22 +6,20 @@ import android.widget.TextView;
 
 import com.xz.android.core.activities.XzActivity;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends XzActivity {
 
     private TextView textView;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        setContentView(R.layout.activity_main);
-        initView();
+    protected Object getContentView() {
+        return R.layout.activity_main;
     }
 
-    /**
-     * 初始化视图
-     */
-    private void initView() {
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        mIsFullScreen = true;
+        super.onCreate(savedInstanceState);
+
         textView = findViewById(R.id.tv_detail);
         textView.setText("我不做大哥好多年");
     }

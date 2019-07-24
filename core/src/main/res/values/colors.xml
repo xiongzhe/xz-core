@@ -6,4 +6,25 @@
     <color name="translucent">#00000000</color>
     <color name="c_323232">#323232</color>
 
+    <color name="colors_A5D63F">#A5D63F</color>
+    <color name="colors_FF5733">#FF5733</color>
+    <color name="colors_00BAAD">#00BAAD</color>
+    <color name="colors_8C7BB1">#8C7BB1</color>
+    <color name="colors_53AFF6">#53AFF6</color>
+    <color name="colors_0099FF">#0099FF</color>
+    <color name="colors_EF9714">#EF9714</color>
+    <color name="colors_FF9900">#FF9900</color>
+    <color name="colors_F9D1D2">#F9D1D2</color>
+    <color name="colors_5CBF29">#5CBF29</color>
+    <color name="colors_D1D5DF">#D1D5DF</color>
+    <color name="colors_EC7677">#EC7677</color>
+    <color name="colors_41BDA6">#41BDA6</color>
+
+    <color name="bg">#F5F8FC</color>
+    <color name="text_gray">#BCBCBC</color>
+    <color name="icon_gray">#999999</color>
+    <color name="gray">#666666</color>
+    <color name="light_black">#555555</color>
+    <color name="bg_line">#FFE3E3E7</color>
+    <color name="c_layout_click">#15000000</color>
 </resources>
