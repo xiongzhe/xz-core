@@ -25,4 +25,9 @@
         android:text="跳转"
         android:textColor="@color/white"
         android:theme="@style/appThemeButton" />
+
+    <com.xz.android.core.ui.view.ClearEditText
+        android:layout_width="@dimen/dp200"
+        android:layout_height="@dimen/dp50"
+        android:layout_marginTop="@dimen/dp20"/>
 </LinearLayout>

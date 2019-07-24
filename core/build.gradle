@@ -43,7 +43,7 @@ dependencies {
     api 'com.android.support:multidex:1.0.3'
 
     //工具包
-    api 'com.blankj:utilcode:1.20.3'
+    api 'com.blankj:utilcode:1.25.0'
 
     // logger依赖
     api 'com.orhanobut:logger:2.1.1'
