@@ -1,14 +1,16 @@
 package com.xiongz.core;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
 import com.xz.android.core.activities.XzActivity;
 
+import butterknife.BindView;
+
 public class MainActivity extends XzActivity {
 
-    private TextView textView;
+    @BindView(R.id.tv_detail)
+    TextView tvDetail;
 
     @Override
     protected Object getContentView() {
@@ -17,10 +19,11 @@ public class MainActivity extends XzActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        mIsFullScreen = true;
+        // mIsFullScreen = true;
         super.onCreate(savedInstanceState);
 
-        textView = findViewById(R.id.tv_detail);
-        textView.setText("我不做大哥好多年");
+        setTitle(this, "简单示例");
+        tvDetail = findViewById(R.id.tv_detail);
+        tvDetail.setText("我不做大哥好多年");
     }
 }
