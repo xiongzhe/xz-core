@@ -9,7 +9,7 @@ import com.xz.android.core.activities.XzActivity;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class MainActivity extends XzActivity {
+public class TestActivity extends XzActivity {
 
     @BindView(R.id.tv_detail)
     TextView tvDetail;
@@ -26,11 +26,6 @@ public class MainActivity extends XzActivity {
 
         setTitle(this, "简单示例");
         tvDetail = findViewById(R.id.tv_detail);
-        tvDetail.setText("我不做大哥好多年");
-    }
-
-    @OnClick(R.id.btn)
-    public void onViewClicked() {
-        ActivityUtils.startActivity(TestActivity.class);
+        tvDetail.setText("对不起，我是警察!");
     }
 }

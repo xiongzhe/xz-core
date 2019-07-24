@@ -64,11 +64,8 @@ public class TimeUtil {
      * @return
      */
     public static SimpleDateFormat getFullFormat() {
-        SimpleDateFormat simpleDateFormat = SDF_THREAD_LOCAL.get();
-        if (simpleDateFormat == null) {
-            simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
-            SDF_THREAD_LOCAL.set(simpleDateFormat);
-        }
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+        SDF_THREAD_LOCAL.set(simpleDateFormat);
         return simpleDateFormat;
     }
 
@@ -89,7 +86,7 @@ public class TimeUtil {
     }
 
     /**
-     * 获取年月日
+     * 获取时分秒
      *
      * @return
      */
@@ -188,6 +185,77 @@ public class TimeUtil {
      * @return
      */
     public static String getTimeFormatText(long time) {
+        Date date = new Date(time);
+        long diff = new Date().getTime() - date.getTime();
+        long r = 0;
+        if (diff > year) {
+            r = (diff / year);
+            return r + "年前";
+        }
+        if (diff > month) {
+            r = (diff / month);
+            return r + "个月前";
+        }
+        if (diff > day) {
+            r = (diff / day);
+            if (r == 1) {
+                return "昨天";
+            } else {
+                return r + "天前";
+            }
+        }
+        if (diff > hour) {
+            r = (diff / hour);
+            return r + "个小时前";
+        }
+        if (diff > minute) {
+            r = (diff / minute);
+            return r + "分钟前";
+        }
+        return "刚刚";
+    }
+
+    /**
+     * 返回友好文字描述的日期
+     *
+     * @param timeStr
+     * @return
+     */
+    public static String getTimeFormatText2(String timeStr) {
+        long time = TimeUtils.string2Millis(timeStr, TimeUtil.getFullFormat());
+        Date date = new Date(time);
+        long diff = new Date().getTime() - date.getTime();
+        long r;
+        if (diff > year || diff > month) {
+            return TimeUtils.millis2String(time, TimeUtil.getFullFormat());
+        }
+        if (diff > day) {
+            r = (diff / day);
+            if (r == 1) {
+                return TimeUtils.getFriendlyTimeSpanByNow(timeStr);
+            } else {
+                return timeStr;
+            }
+        }
+        if (diff > hour) {
+            r = (diff / hour);
+            return TimeUtils.getFriendlyTimeSpanByNow(timeStr);
+        }
+        if (diff > minute) {
+            r = (diff / minute);
+            return r + "分钟前";
+        }
+        return "刚刚";
+    }
+
+    /**
+     * 返回文字描述的日期
+     *
+     * @param timeStr
+     * @return
+     */
+    public static String getTimeFormatText3(String timeStr) {
+        long time = TimeUtils.string2Millis(timeStr, TimeUtil.getFullFormat());
         Date date = new Date(time);
         long diff = new Date().getTime() - date.getTime();
         long r = 0;
