@@ -7,8 +7,8 @@ android {
     defaultConfig {
         minSdkVersion 19
         targetSdkVersion 28
-        versionCode 8
-        versionName "1.0.8"
+        versionCode 9
+        versionName "1.0.9"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         ndk {
             // 设置支持的SO库架构
@@ -43,7 +43,7 @@ dependencies {
     api 'com.android.support:multidex:1.0.3'
 
     //工具包
-    api 'com.blankj:utilcode:1.25.0'
+    api 'com.blankj:utilcode:1.25.4'
 
     // logger依赖
     api 'com.orhanobut:logger:2.1.1'
