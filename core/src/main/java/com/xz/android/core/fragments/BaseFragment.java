@@ -11,8 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.blankj.utilcode.util.KeyboardUtils;
-//import com.gyf.barlibrary.ImmersionBar;
 import com.xz.android.core.net.rx.RxApiManager;
 
 import org.greenrobot.eventbus.EventBus;
@@ -77,8 +75,6 @@ public abstract class BaseFragment extends Fragment {
 
     @Override
     public void onDestroyView() {
-        //设置键盘消失
-        KeyboardUtils.hideSoftInput(_mActivity);
         //销毁EventBus
         if (mIsRegisterBus) {
             EventBus.getDefault().unregister(this);
