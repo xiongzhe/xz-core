@@ -17,6 +17,7 @@ public class RxNetClientBuilder {
     private String mUrl = null;
     private RequestBody mBody = null;
     private File mFile = null;
+    private String mFileKey = null;
 
     RxNetClientBuilder() {
     }
@@ -54,6 +55,11 @@ public class RxNetClientBuilder {
         return this;
     }
 
+    public final RxNetClientBuilder fileKey(String fileKey) {
+        this.mFileKey = fileKey;
+        return this;
+    }
+
     public final RxNetClientBuilder raw(String raw) {
         this.mBody = RequestBody.create(MediaType.parse("application/json;charset=UTF-8"), raw);
         return this;
@@ -62,6 +68,6 @@ public class RxNetClientBuilder {
     public final RxNetClient build() {
         if (PARAMS == null) PARAMS = new HashMap<>();
         if (HEADERS == null) HEADERS = new HashMap<>();
-        return new RxNetClient(mUrl, PARAMS, HEADERS, mBody, mFile);
+        return new RxNetClient(mUrl, PARAMS, HEADERS, mBody, mFile, mFileKey);
     }
 }

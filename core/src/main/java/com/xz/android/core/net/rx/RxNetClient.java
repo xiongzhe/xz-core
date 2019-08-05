@@ -1,5 +1,7 @@
 package com.xz.android.core.net.rx;
 
+import android.text.TextUtils;
+
 import com.xz.android.core.net.HttpMethod;
 
 import java.io.File;
@@ -34,17 +36,20 @@ public class RxNetClient {
     private String URL;
     private RequestBody BODY;
     private File FILE;
+    private String FILE_KEY;
 
     RxNetClient(String url,
                 HashMap<String, Object> params,
                 HashMap<String, Object> headers,
                 RequestBody body,
-                File file) {
+                File file,
+                String fileKey) {
         this.PARAMS = params;
         this.HEADERS = headers;
         this.URL = url;
         this.BODY = body;
         this.FILE = file;
+        this.FILE_KEY = fileKey;
     }
 
     public static RxNetClientBuilder builder() {
@@ -91,7 +96,7 @@ public class RxNetClient {
                 RequestBody requestBody =
                         RequestBody.create(MediaType.parse(MultipartBody.FORM.toString()), FILE);
                 MultipartBody.Part body =
-                        MultipartBody.Part.createFormData("upload", FILE.getName(), requestBody);
+                        MultipartBody.Part.createFormData(FILE_KEY, FILE.getName(), requestBody);
                 observable = service.upload(HEADERS, URL, body);
                 break;
             default:
@@ -159,6 +164,9 @@ public class RxNetClient {
 
     // 上传
     public Observable<String> upload() {
+        if (TextUtils.isEmpty(FILE_KEY)) {
+            throw new RuntimeException("file key is null!");
+        }
         return request(UPLOAD);
     }
 

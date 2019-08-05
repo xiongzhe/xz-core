@@ -21,13 +21,22 @@
         android:id="@+id/btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="@dimen/dp50"
         android:text="跳转"
+        android:textColor="@color/white"
+        android:theme="@style/appThemeButton" />
+
+    <Button
+        android:id="@+id/btn_upload"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp30"
+        android:text="上传"
         android:textColor="@color/white"
         android:theme="@style/appThemeButton" />
 
     <com.xz.android.core.ui.view.ClearEditText
         android:layout_width="@dimen/dp200"
         android:layout_height="@dimen/dp50"
-        android:layout_marginTop="@dimen/dp20"/>
+        android:layout_marginTop="@dimen/dp20" />
 </LinearLayout>
